@@ -22,8 +22,11 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.neo.composemovieapp.model.Movie
+import com.neo.composemovieapp.model.getMovies
 import com.neo.composemovieapp.navigation.MovieNavigation
 import com.neo.composemovieapp.ui.theme.ComposeMovieAppTheme
+import com.neo.composemovieapp.widgets.MovieRow
 import java.nio.file.Files.size
 
 class MainActivity : ComponentActivity() {
@@ -47,12 +50,8 @@ fun MyApp(content: @Composable () -> Unit) {
 @Composable
 fun MainContent(
     navController: NavController,
-    movieList: List<String> =
-        listOf(
-            "Avengers", "SpiderMan", "300", "Power book IV",
-            "Peace maker", "Top Boy", "Gangs of London",
-            "007"
-        )
+    movieList: List<Movie> =
+        getMovies()
 ) {
     Surface(color = MaterialTheme.colors.background) {
         Column(modifier = Modifier.padding(12.dp)) {
@@ -70,36 +69,7 @@ fun MainContent(
 
 
 
-@Composable
-fun MovieRow(movie: String, onItemClick: (String) -> Unit = {}) {
-    Card(
-        modifier = Modifier
-            .padding(4.dp)
-            .fillMaxWidth()
-            .height(130.dp)
-            .clickable {
-                onItemClick.invoke(movie)
-            },
-        shape = CircleShape.copy(all = CornerSize(16.dp)),
-        elevation = 6.dp
-    ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Start
-        ) {
-            Surface(
-                modifier = Modifier
-                    .padding(12.dp)
-                    .size(100.dp),
-                shape = RectangleShape,
-                elevation = 5.dp
-            ) {
-                Icon(imageVector = Icons.Default.AccountBox, contentDescription = "Movie Image")
-            }
-            Text(text = movie)
-        }
-    }
-}
+
 
 @Composable
 fun Greeting(name: String) {
