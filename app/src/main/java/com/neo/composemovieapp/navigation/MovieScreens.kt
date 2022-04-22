@@ -8,11 +8,9 @@ enum class MovieScreens {
     HomeScreen,
     DetailScreen;
 
-    // note that this can be done with companion obj wrapping fun
-    // using just the @JVMStatic annot above the fun
-    companion object{
-        fun fromRoute(route: String?): MovieScreens{
-            return when(route?.substringBefore("/")){
+    companion object {
+        fun fromRoute(route: String?): MovieScreens {
+            return when (route?.substringBefore("/")) {
                 HomeScreen.name -> HomeScreen
                 DetailScreen.name -> DetailScreen
                 null -> HomeScreen

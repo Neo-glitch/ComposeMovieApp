@@ -11,8 +11,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.neo.composemovieapp.MovieRow
+import com.neo.composemovieapp.model.Movie
+import com.neo.composemovieapp.model.getMovies
 import com.neo.composemovieapp.navigation.MovieScreens
+import com.neo.composemovieapp.widgets.MovieRow
 
 @Composable
 fun HomeScreen(navController: NavController){
@@ -31,12 +33,8 @@ fun HomeScreen(navController: NavController){
 @Composable
 fun MainContent(
     navController: NavController,
-    movieList: List<String> =
-        listOf(
-            "Avengers", "SpiderMan", "300", "Power book IV",
-            "Peace maker", "Top Boy", "Gangs of London",
-            "007"
-        )
+    movieList: List<Movie> =
+        getMovies()
 ) {
     Surface(color = MaterialTheme.colors.background) {
         Column(modifier = Modifier.padding(12.dp)) {
